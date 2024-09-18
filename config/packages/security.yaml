@@ -17,10 +17,10 @@ security:
     main:
       lazy: true
       provider: app_user_provider
-      json_login:
+      form_login:
         check_path: /login
-        username_path: email
-        password_path: password
+        username_parameter: email
+        password_parameter: password
         success_handler: App\Security\LoginSuccessHandler
         failure_handler: App\Security\LoginFailureHandler
       logout:
@@ -28,17 +28,6 @@ security:
         target: /
 
   access_control:
-    # Permet l'accès à la page de connexion sans être authentifié
+    - { path: ^/admin, roles:  }
+    - { path: ^/register, roles: }
     - { path: ^/login, roles:  }
-    - { path: ^/register, roles:  }
-
-    # Permet l'accès sans authentification aux pages home et contact
-    - { path: ^/contact, roles: }
-    - { path: ^/home, roles:  }
-
-    # Protège les pages admin et employee par des rôles spécifiques
-    - { path: ^/admin, roles: ROLE_ADMIN }
-    - { path: ^/employee, roles: ROLE_EMPLOYE }
-
-    # Toutes les autres pages nécessitent une authentification
-    - { path: ^/, roles:  }

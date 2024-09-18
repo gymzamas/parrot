@@ -5,18 +5,60 @@
 {% block title %}Liste des voitures d'occasion{% endblock %}
 
 {% block body %}
-    <h1>Voitures d'occasion</h1>
+    <h1 class="page-title">Voitures d'occasion</h1>
 
     <div class="voitures-list">
         {% for voiture in voitures %}
             <div class="voiture-card">
+                <img src="{{ voiture.imagePrincipale }}" alt="{{ voiture.nom }}" class="voiture-image"/>
                 <h3>{{ voiture.nom }}</h3>
-                <p>Prix : {{ voiture.prix }} €</p>
-                <p>Kilométrage : {{ voiture.kilometrage }} km</p>
-                <p><a href="{{ path('app_voiture_occasion_show', {id: voiture.id}) }}">Voir détails</a></p>
+                <p><strong>Prix :</strong> {{ voiture.prix }} €</p>
+                <p><strong>Kilométrage :</strong> {{ voiture.kilometrage }} km</p>
+                <p><strong>Année :</strong> {{ voiture.anneeMiseEnCirculation|date('Y') }}</p>
+                <a href="{{ path('app_voiture_occasion_show', {id: voiture.id}) }}" class="btn btn-primary">Voir détails</a>
             </div>
         {% else %}
             <p>Aucune voiture trouvée.</p>
         {% endfor %}
     </div>
+
+    <style>
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #D92332;
+        }
+        .voitures-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        .voiture-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .voiture-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .btn {
+            background-color: #D92332;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #D94350;
+        }
+    </style>
 {% endblock %}

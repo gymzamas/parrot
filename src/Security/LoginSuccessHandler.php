@@ -1,6 +1,7 @@
 <?php
 
 // src/Security/LoginSuccessHandler.php
+
 namespace App\Security;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -20,7 +21,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): RedirectResponse
     {
-        // Redirection vers la page d'accueil après connexion
-        return new RedirectResponse($this->router->generate('homepage'));
+        // Redirection vers la page d'ajout de véhicule après la connexion
+        return new RedirectResponse($this->router->generate('app_voiture_occasion_new'));
     }
 }

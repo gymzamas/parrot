@@ -1,16 +1,13 @@
 <?php
 
-// src/Form/ContactType.php
-
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactType extends AbstractType
 {
@@ -19,19 +16,24 @@ class ContactType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom',
+                'attr' => ['class' => 'form-control']
             ])
             ->add('prenom', TextType::class, [
                 'label' => 'Prénom',
+                'attr' => ['class' => 'form-control']
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Adresse email',
-            ])
-            ->add('telephone', TelType::class, [
-                'label' => 'Numéro de téléphone',
+                'label' => 'Email',
+                'attr' => ['class' => 'form-control']
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Message',
-            ])
-            ->add('Envoyer', SubmitType::class);
+                'attr' => ['class' => 'form-control']
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([]);
     }
 }

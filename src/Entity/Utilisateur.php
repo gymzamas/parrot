@@ -1,18 +1,22 @@
 <?php
+// src/Entity/Utilisateur.php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
-class Utilisateur implements UserInterface
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column(type: 'json')]
@@ -27,22 +31,38 @@ class Utilisateur implements UserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $prenom = null;
 
-    // Implémentation des méthodes requises par UserInterface
+    /**
+     * Ce champ n'est pas persisté dans la base de données.
+     */
+    #[Assert\NotBlank(message: 'Veuillez entrer un mot de passe')]
+    #[Assert\Length(min: 6, minMessage: 'Le mot de passe doit contenir au moins 6 caractères')]
+    private ?string $plainPassword = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
 
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
-    }
-
-    public function getUsername(): string
-    {
-        return $this->getUserIdentifier(); // Pour compatibilité si nécessaire
+        return $this->email;
     }
 
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // Chaque utilisateur doit avoir au moins ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -63,6 +83,18 @@ class Utilisateur implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
@@ -93,6 +125,6 @@ class Utilisateur implements UserInterface
 
     public function eraseCredentials(): void
     {
-        // Effacer toute donnée sensible stockée dans l'entité si nécessaire
+        $this->plainPassword = null; // Efface la valeur après utilisation
     }
 }
