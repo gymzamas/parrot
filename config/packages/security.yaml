@@ -1,0 +1,44 @@
+security:
+  password_hashers:
+    App\Entity\Utilisateur:
+      algorithm: auto
+
+  providers:
+    app_user_provider:
+      entity:
+        class: App\Entity\Utilisateur
+        property: email
+
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+
+    main:
+      lazy: true
+      provider: app_user_provider
+      json_login:
+        check_path: /login
+        username_path: email
+        password_path: password
+        success_handler: App\Security\LoginSuccessHandler
+        failure_handler: App\Security\LoginFailureHandler
+      logout:
+        path: /logout
+        target: /
+
+  access_control:
+    # Permet l'accès à la page de connexion sans être authentifié
+    - { path: ^/login, roles:  }
+    - { path: ^/register, roles:  }
+
+    # Permet l'accès sans authentification aux pages home et contact
+    - { path: ^/contact, roles: }
+    - { path: ^/home, roles:  }
+
+    # Protège les pages admin et employee par des rôles spécifiques
+    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/employee, roles: ROLE_EMPLOYE }
+
+    # Toutes les autres pages nécessitent une authentification
+    - { path: ^/, roles:  }

@@ -1,0 +1,23 @@
+{# templates/admin/dashboard.html.twig #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>Bienvenue sur le tableau de bord du Garage Parrot</h1>
+    <p>C'est ici que vous pouvez gérer vos employés et utilisateurs.</p>
+
+    <div class="dashboard-cards">
+        <div class="card">
+            <h3>Gestion des employés</h3>
+            <a href="{{ path('admin_crud_employe') }}">Voir les employés</a>
+        </div>
+
+        <div class="card">
+            <h3>Gestion des utilisateurs</h3>
+            <a href="{{ path('admin_crud_utilisateur') }}">Voir les utilisateurs</a>
+        </div>
+    </div>
+{% endblock %}

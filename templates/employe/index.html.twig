@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employe Index{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-family: 'Rajdhani', sans-serif;
+            color: #D92332;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 15px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .table th {
+            background-color: #262526;
+            color: white;
+        }
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .table tr:hover {
+            background-color: #ddd;
+        }
+        .table td a {
+            color: #D92332;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+        .table td a:hover {
+            color: #B91F28;
+            text-decoration: underline;
+        }
+        .no-records {
+            text-align: center;
+            color: #777;
+            font-style: italic;
+        }
+        .create-new {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #D92332;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .create-new:hover {
+            background-color: #B91F28;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>Employe Index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employe in employes %}
+            <tr>
+                <td>{{ employe.id }}</td>
+                <td>
+                    <a href="{{ path('app_employe_show', {'id': employe.id}) }}">Show</a>
+                    <a href="{{ path('app_employe_edit', {'id': employe.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2" class="no-records">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employe_new') }}" class="create-new">Create New Employe</a>
+{% endblock %}

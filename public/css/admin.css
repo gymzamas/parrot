@@ -1,0 +1,27 @@
+/* public/css/admin.css */
+body {
+    background-color: #f2f2f2;
+}
+
+h1 {
+    color: #D92332;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.dashboard-cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card h3 {
+    color: #262526;
+    font-family: 'Barlow', sans-serif;
+}

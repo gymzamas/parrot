@@ -1,0 +1,29 @@
+<form method="post" action="{{ path('app_employe_delete', {'id': employe.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ employe.id) }}">
+    <button class="btn btn-delete">Delete</button>
+
+    <style>
+        .btn {
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-delete {
+            background-color: #D92332;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background-color: #B91F28;
+        }
+
+        .btn-delete:active {
+            background-color: #A81924;
+        }
+    </style>
+</form>

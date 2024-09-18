@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Garage Parrot - Contact{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+        <!-- Styles CSS -->
+        <style>
+            body {
+                font-family: 'Barlow', sans-serif;
+                background-color: #F2F2F2;
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            nav {
+                background-color: #D92332;
+                padding: 10px;
+            }
+
+            nav ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 15px;
+            }
+
+            nav ul li a {
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+                padding: 10px 20px;
+                border-radius: 5px;
+            }
+
+            nav ul li a:hover {
+                background-color: #D94350;
+            }
+
+            .content {
+                flex: 1; /* Prend tout l'espace restant */
+                margin: 20px;
+            }
+
+            footer {
+                text-align: center;
+                padding: 20px;
+                background-color: #262526;
+                color: white;
+                width: 100%;
+                margin-top: auto; /* S'assure que le footer est en bas */
+            }
+
+            footer p {
+                margin: 5px;
+            }
+
+            form {
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 600px;
+                margin: auto;
+            }
+
+            form div {
+                margin-bottom: 15px;
+            }
+
+            form label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            form input, form textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            form button {
+                background-color: #D92332;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            form button:hover {
+                background-color: #D94350;
+            }
+        </style>
+
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav>
+            <ul>
+                <li><a href="{{ path('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenu principal -->
+        <div class="content">
+            {% block body %}
+            <h1>Contactez-nous</h1>
+            <form action="" method="post">
+                <div>
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+
+                <button type="submit">Envoyer</button>
+            </form>
+            {% endblock %}
+        </div>
+
+        <!-- Pied de page -->
+        <footer>
+            <p>&copy; 2024 Garage Parrot. Tous droits réservés.</p>
+            <p>Adresse: 123 Rue du Garage, Paris | Téléphone: +33 1 23 45 67 89</p>
+        </footer>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
