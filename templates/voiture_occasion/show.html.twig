@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ voiture.nom }} - Voiture d'occasion{% endblock %}
+
+{% block body %}
+    <h1>{{ voiture.nom }}</h1>
+    <p><strong>Prix :</strong> {{ voiture.prix }} €</p>
+    <p><strong>Kilométrage :</strong> {{ voiture.kilometrage }} km</p>
+    <p><strong>Année de mise en circulation :</strong> {{ voiture.anneeMiseEnCirculation|date('Y') }}</p>
+    <p>{{ voiture.description }}</p>
+
+    <h2>Contactez-nous au sujet de cette voiture</h2>
+
+    <div class="contact-form-container">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.nom) }}
+            {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.prenom) }}
+            {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.telephone) }}
+            {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.message) }}
+            {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+        </div>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+
+    <style>
+        .contact-form-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .btn-primary {
+            background-color: #D92332;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #D94350;
+        }
+    </style>
+{% endblock %}

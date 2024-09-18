@@ -1,0 +1,22 @@
+{# templates/voiture_occasion/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des voitures d'occasion{% endblock %}
+
+{% block body %}
+    <h1>Voitures d'occasion</h1>
+
+    <div class="voitures-list">
+        {% for voiture in voitures %}
+            <div class="voiture-card">
+                <h3>{{ voiture.nom }}</h3>
+                <p>Prix : {{ voiture.prix }} €</p>
+                <p>Kilométrage : {{ voiture.kilometrage }} km</p>
+                <p><a href="{{ path('app_voiture_occasion_show', {id: voiture.id}) }}">Voir détails</a></p>
+            </div>
+        {% else %}
+            <p>Aucune voiture trouvée.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

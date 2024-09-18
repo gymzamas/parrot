@@ -2,44 +2,128 @@
 
 {% block title %}Horaire index{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            font-family: 'Rajdhani', sans-serif;
+            color: #D92332;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .table-container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #262526;
+            color: white;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #f9e2e2;
+        }
+
+        .table td a {
+            color: #D92332;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .table td a:hover {
+            text-decoration: underline;
+        }
+
+        .no-records {
+            text-align: center;
+            color: #777;
+            font-style: italic;
+        }
+
+        .btn-create {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #D92332;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn-create:hover {
+            background-color: #B91F28;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <h1>Horaire index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Jour</th>
-                <th>HeureOuvertureMatin</th>
-                <th>HeureFermetureMatin</th>
-                <th>HeureOuvertureApresMidi</th>
-                <th>HeureFermetureApresMidi</th>
-                <th>Ferme</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for horaire in horaires %}
-            <tr>
-                <td>{{ horaire.id }}</td>
-                <td>{{ horaire.Jour }}</td>
-                <td>{{ horaire.heureOuvertureMatin ? horaire.heureOuvertureMatin|date('H:i:s') : '' }}</td>
-                <td>{{ horaire.heureFermetureMatin ? horaire.heureFermetureMatin|date('H:i:s') : '' }}</td>
-                <td>{{ horaire.heureOuvertureApresMidi ? horaire.heureOuvertureApresMidi|date('H:i:s') : '' }}</td>
-                <td>{{ horaire.heureFermetureApresMidi ? horaire.heureFermetureApresMidi|date('H:i:s') : '' }}</td>
-                <td>{{ horaire.ferme ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_horaire_show', {'id': horaire.id}) }}">show</a>
-                    <a href="{{ path('app_horaire_edit', {'id': horaire.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Jour</th>
+                    <th>Heure Ouverture Matin</th>
+                    <th>Heure Fermeture Matin</th>
+                    <th>Heure Ouverture Après-Midi</th>
+                    <th>Heure Fermeture Après-Midi</th>
+                    <th>Fermé</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for horaire in horaires %}
+                <tr>
+                    <td>{{ horaire.id }}</td>
+                    <td>{{ horaire.jour }}</td>
+                    <td>{{ horaire.heureOuvertureMatin ? horaire.heureOuvertureMatin|date('H:i') : '' }}</td>
+                    <td>{{ horaire.heureFermetureMatin ? horaire.heureFermetureMatin|date('H:i') : '' }}</td>
+                    <td>{{ horaire.heureOuvertureApresMidi ? horaire.heureOuvertureApresMidi|date('H:i') : '' }}</td>
+                    <td>{{ horaire.heureFermetureApresMidi ? horaire.heureFermetureApresMidi|date('H:i') : '' }}</td>
+                    <td>{{ horaire.ferme ? 'Oui' : 'Non' }}</td>
+                    <td>
+                        <a href="{{ path('app_horaire_show', {'id': horaire.id}) }}">Voir</a>
+                        <a href="{{ path('app_horaire_edit', {'id': horaire.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8" class="no-records">Aucun horaire trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_horaire_new') }}">Create new</a>
+        <a href="{{ path('app_horaire_new') }}" class="btn-create">Créer un nouvel horaire</a>
+    </div>
 {% endblock %}
