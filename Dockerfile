@@ -21,3 +21,8 @@ RUN chown -R www-data:www-data /var/www/html
 
 # Lancement de PHP-FPM
 CMD ["php-fpm"]
+# Install Sodium PHP extension
+RUN apt-get update && apt-get install -y libssl-dev pkg-config libsodium-dev \
+    && docker-php-ext-install sodium
+# Install Composer dependencies, including symfony/mime
+RUN composer require symfony/mime

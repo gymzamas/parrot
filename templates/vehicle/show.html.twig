@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ vehicle.marque }} - {{ vehicle.model }}{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .vehicle-details-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px auto;
+        width: 80%;
+    }
+
+    .vehicle-image {
+        width: 60%;
+    }
+
+    .vehicle-image img {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .vehicle-info {
+        width: 35%;
+        padding: 20px;
+        background-color: #f4f4f4;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .vehicle-info h1 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .vehicle-info .price {
+        font-size: 28px;
+        color: #007bff;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .vehicle-info ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .vehicle-info ul li {
+        font-size: 16px;
+        color: #555;
+        margin: 10px 0;
+    }
+
+    .vehicle-info ul li span {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .contact-button {
+        display: block;
+        margin-top: 20px;
+        padding: 15px;
+        text-align: center;
+        background-color: #007bff;
+        color: white;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .contact-button:hover {
+        background-color: #0056b3;
+    }
+
+    .extra-images {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 15px;
+    }
+
+    .extra-images img {
+        width: 24%;
+        border-radius: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="vehicle-details-container">
+    <!-- Section Image -->
+    <div class="vehicle-image">
+        <img src="{{ asset('images/' ~ vehicle.image) }}" alt="Photo de {{ vehicle.marque }}">
+        <div class="extra-images">
+            <img src="{{ asset('images/interior_1.png') }}" alt="Intérieur">
+            <img src="{{ asset('images/wheel_1.png') }}" alt="Roue">
+            <img src="{{ asset('images/back_1.png') }}" alt="Vue arrière">
+        </div>
+    </div>
+
+    <!-- Section Informations -->
+    <div class="vehicle-info">
+        <h1>{{ vehicle.marque }} - {{ vehicle.model }}</h1>
+        <p class="price">Prix {{ vehicle.prix | number_format(0, ',', ' ') }} €</p>
+        <ul>
+            <li><span>Kilométrage :</span> {{ vehicle.kilometrage | number_format(0, ',', ' ') }} km</li>
+            <li><span>Boîte de vitesse :</span> Automatique</li>
+            <li><span>Carburant :</span> Essence</li>
+            <li><span>Millésime :</span> {{ vehicle.annee }}</li>
+            <li><span>Mise en circulation :</span> 08/2015</li>
+        </ul>
+
+        <!-- Bouton pour contacter le vendeur -->
+        <a href="#" class="contact-button">Contactez le vendeur</a>
+    </div>
+</div>
+{% endblock %}
