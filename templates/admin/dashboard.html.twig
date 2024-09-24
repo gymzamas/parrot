@@ -1,23 +1,76 @@
-{# templates/admin/dashboard.html.twig #}
-{% extends '@EasyAdmin/page/content.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-{% endblock %}
+{% block title %}Dashboard Admin{% endblock %}
 
-{% block content %}
-    <h1>Bienvenue sur le tableau de bord du Garage Parrot</h1>
-    <p>C'est ici que vous pouvez gérer vos employés et utilisateurs.</p>
+{% block body %}
+    <div class="dashboard-container">
+        <h1>Bienvenue sur le Dashboard Admin</h1>
+        <p>Gérez vos employés, horaires, et véhicules depuis ce tableau de bord.</p>
 
-    <div class="dashboard-cards">
-        <div class="card">
-            <h3>Gestion des employés</h3>
-            <a href="{{ path('admin_crud_employe') }}">Voir les employés</a>
+        <div class="dashboard-section">
+            <h2>Gestion des employés</h2>
+            <a href="{{ path('app_employe_index') }}" class="btn btn-primary">Voir les employés</a>
+            <a href="{{ path('app_employe_new') }}" class="btn btn-success">Ajouter un employé</a>
         </div>
 
-        <div class="card">
-            <h3>Gestion des utilisateurs</h3>
-            <a href="{{ path('admin_crud_utilisateur') }}">Voir les utilisateurs</a>
+        <div class="dashboard-section">
+            <h2>Gestion des horaires</h2>
+            <a href="{{ path('app_horaire_index') }}" class="btn btn-primary">Voir les horaires</a>
+            <a href="{{ path('app_horaire_new') }}" class="btn btn-success">Ajouter un horaire</a>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Gestion des véhicules</h2>
+            <a href="{{ path('app_vehicle_index') }}" class="btn btn-primary">Voir tous les véhicules</a>
+            <a href="{{ path('app_vehicle_new') }}" class="btn btn-success">Ajouter un nouveau véhicule</a>
         </div>
     </div>
+
+    <style>
+        .dashboard-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-section {
+            margin-bottom: 40px;
+        }
+
+        .dashboard-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            margin: 5px;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+    </style>
 {% endblock %}

@@ -154,7 +154,9 @@
             <ul>
                 <li><a href="{{ path('app_home') }}">Home</a></li>
                 <li><a href="{{ path('nos_services') }}">Nos Services</a></li>
-                <li><a href="{{ path('contact') }}">Contact</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('admin_dashboard') }}">Accéder au Dashboard Admin</a></li>
+                {% endif %}
             </ul>
             <div class="search-bar">
                 <input type="text" placeholder="Rechercher un véhicule">
