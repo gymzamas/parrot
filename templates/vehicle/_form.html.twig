@@ -1,0 +1,94 @@
+<style>
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    form .form-group {
+        margin-bottom: 20px;
+    }
+
+    form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    form input,
+    form textarea,
+    form select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+    }
+
+    form input:focus,
+    form textarea:focus,
+    form select:focus {
+        border-color: #1e90ff;
+    }
+
+    button.btn {
+        background-color: #1e90ff;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button.btn:hover {
+        background-color: #1c86ee;
+    }
+
+    .form-errors {
+        color: red;
+        font-size: 0.9rem;
+    }
+</style>
+
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.marque) }}
+        {{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}
+        <div class="form-errors">{{ form_errors(form.marque) }}</div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.prix) }}
+        {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+        <div class="form-errors">{{ form_errors(form.prix) }}</div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.kilometrage) }}
+        {{ form_widget(form.kilometrage, {'attr': {'class': 'form-control'}}) }}
+        <div class="form-errors">{{ form_errors(form.kilometrage) }}</div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.annee) }}
+        {{ form_widget(form.annee, {'attr': {'class': 'form-control'}}) }}
+        <div class="form-errors">{{ form_errors(form.annee) }}</div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+        <div class="form-errors">{{ form_errors(form.image) }}</div>
+    </div>
+
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}
