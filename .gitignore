@@ -13,4 +13,6 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+# Ignorer les credentials Firebase
 config/firebase/*.json
