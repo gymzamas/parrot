@@ -4,12 +4,27 @@
 
 {% block stylesheets %}
 <style>
+    /* Add background image */
+    body {
+        background-image: url('{{ asset('images/57.jpg') }}');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
     /* Sidebar styling */
     .filter-sidebar {
         background-color: #f4f4f4;
-        padding: 20px;
-        width: 300px;
-        border-radius: 10px;
+        padding: 15px;
+        width: 291px;
+        border-radius: 25px;
+        position: fixed;
+        top: 82px;
+        left: 25px;
+        height: 85%;
+        overflow-y: auto;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     }
 
     .filter-sidebar h2 {
@@ -53,12 +68,17 @@
     /* Container for sidebar and results */
     .vehicle-container {
         display: flex;
+        margin-left: 320px; /* Ajuste la largeur en fonction de la taille de la sidebar */
+        flex-wrap: wrap;
         justify-content: space-between;
+        padding: 20px;
     }
 
     .vehicle-listing {
         flex-grow: 1;
-        margin-left: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
     }
 
     /* Styling for vehicle cards */
@@ -94,6 +114,61 @@
         font-size: 14px;
         color: #666;
         margin: 5px 0;
+    }
+
+    .vehicle-card a {
+        color: #007bff;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .vehicle-card a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+        .vehicle-card {
+            width: 45%;
+        }
+
+        .vehicle-container {
+            margin-left: 0;
+            padding: 20px;
+        }
+
+        .filter-sidebar {
+            position: static;
+            width: 100%;
+            margin-bottom: 20px;
+            box-shadow: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .vehicle-card {
+            width: 100%;
+        }
+
+        .vehicle-container {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .vehicle-card {
+            width: 100%;
+        }
+
+        .filter-sidebar input[type="text"],
+        .filter-sidebar input[type="number"],
+        .filter-sidebar input[type="submit"] {
+            font-size: 14px;
+        }
+
+        .filter-sidebar h2 {
+            font-size: 16px;
+        }
     }
 </style>
 {% endblock %}

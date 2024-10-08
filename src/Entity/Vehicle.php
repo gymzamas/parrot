@@ -16,7 +16,7 @@ class Vehicle
     #[ORM\Column(type: 'string', length: 255)]
     private $marque;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)] // Ajout du modèle avec nullable
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $model;
 
     #[ORM\Column(type: 'float')]
@@ -28,8 +28,17 @@ class Vehicle
     #[ORM\Column(type: 'integer')]
     private $annee;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)] // Image nullable
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)] // Ajout de la boîte de vitesse
+    private $boiteDeVitesse;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)] // Ajout du type de carburant
+    private $carburant;
+
+    #[ORM\Column(type: 'date', nullable: true)] // Ajout de la date de mise en circulation
+    private $dateMiseEnCirculation;
 
     // Getter et Setter pour l'ID
     public function getId(): ?int
@@ -46,7 +55,6 @@ class Vehicle
     public function setMarque(string $marque): self
     {
         $this->marque = $marque;
-
         return $this;
     }
 
@@ -59,7 +67,6 @@ class Vehicle
     public function setModel(?string $model): self
     {
         $this->model = $model;
-
         return $this;
     }
 
@@ -72,7 +79,6 @@ class Vehicle
     public function setPrix(float $prix): self
     {
         $this->prix = $prix;
-
         return $this;
     }
 
@@ -85,7 +91,6 @@ class Vehicle
     public function setKilometrage(int $kilometrage): self
     {
         $this->kilometrage = $kilometrage;
-
         return $this;
     }
 
@@ -98,7 +103,6 @@ class Vehicle
     public function setAnnee(int $annee): self
     {
         $this->annee = $annee;
-
         return $this;
     }
 
@@ -111,7 +115,42 @@ class Vehicle
     public function setImage(?string $image): self
     {
         $this->image = $image;
+        return $this;
+    }
 
+    // Getter et Setter pour la boîte de vitesse
+    public function getBoiteDeVitesse(): ?string
+    {
+        return $this->boiteDeVitesse;
+    }
+
+    public function setBoiteDeVitesse(?string $boiteDeVitesse): self
+    {
+        $this->boiteDeVitesse = $boiteDeVitesse;
+        return $this;
+    }
+
+    // Getter et Setter pour le carburant
+    public function getCarburant(): ?string
+    {
+        return $this->carburant;
+    }
+
+    public function setCarburant(?string $carburant): self
+    {
+        $this->carburant = $carburant;
+        return $this;
+    }
+
+    // Getter et Setter pour la date de mise en circulation
+    public function getDateMiseEnCirculation(): ?\DateTimeInterface
+    {
+        return $this->dateMiseEnCirculation;
+    }
+
+    public function setDateMiseEnCirculation(?\DateTimeInterface $dateMiseEnCirculation): self
+    {
+        $this->dateMiseEnCirculation = $dateMiseEnCirculation;
         return $this;
     }
 }

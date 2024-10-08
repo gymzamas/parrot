@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         <style>
             body {
                 font-family: 'Barlow', sans-serif;
-                background-color: #F2F2F2;
+                background-color: #f9f9f9;
                 margin: 0;
                 padding: 0;
                 min-height: 100vh;
@@ -23,15 +23,18 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 20px;
-                background-color: white;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 0px;
+                background-color: rgba(0, 0, 0, 0.6);
+                color: #fff;
+                position: absolute;
+                width: 100%;
+                z-index: 100;
             }
 
             nav .logo {
-                font-size: 24px;
+                font-size: 34px;
                 font-weight: bold;
-                color: #333;
+                color: #FFFFFF;
             }
 
             nav ul {
@@ -43,53 +46,28 @@
             }
 
             nav ul li {
-                font-size: 16px;
+                font-size: 20px;
+                font-weight: bold;
             }
 
             nav ul li a {
                 text-decoration: none;
-                color: #333;
-            }
-
-            nav .search-bar {
-                display: flex;
-                align-items: center;
-            }
-
-            nav .search-bar input {
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                width: 300px;
-            }
-
-            nav .contact-info {
-                font-size: 16px;
-                color: #666;
-            }
-
-            nav .cta-button {
-                background-color: #e74c3c;
-                color: white;
-                padding: 10px 20px;
-                border: none;
+                color: #FFFFFF;
+                padding: 10px;
                 border-radius: 5px;
-                font-weight: bold;
-                text-decoration: none;
+                transition: background-color 0.3s ease;
             }
 
-            .content {
-                flex: 1;
-                margin: auto;
-                max-width: 1200px;
-                width: 90%;
+            nav ul li a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
             }
 
+            /* Footer */
             footer {
                 text-align: center;
                 background-color: #262526;
                 color: white;
-                width: 100%;
+                padding: 20px 0;
                 margin-top: auto;
             }
 
@@ -97,100 +75,33 @@
                 margin: 5px;
             }
 
-            form {
-                background-color: white;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                max-width: 600px;
-                margin: auto;
-            }
-
-            form div {
-                margin-bottom: 15px;
-            }
-
-            form label {
-                display: block;
-                font-weight: bold;
-                margin-bottom: 5px;
-            }
-
-            form input, form textarea {
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                font-size: 16px;
-            }
-
-            form button {
-                background-color: #D92332;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                font-size: 16px;
-                width: 100%;
-            }
-
-            form button:hover {
-                background-color: #D94350;
-            }
-
-            .form-error {
-                color: red;
-                font-size: 14px;
-            }
         </style>
 
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+
         <!-- Navbar -->
         <nav>
             <div class="logo">Garage Parrot</div>
             <ul>
-                <li><a href="{{ path('app_home') }}">Home</a></li>
+                <li><a href="{{ path('app_home') }}">Accueil</a></li>
                 <li><a href="{{ path('nos_services') }}">Nos Services</a></li>
+                <li><a href="http://localhost:8081/vehicle">Véhicules</a></li> <!-- Lien vers la page des véhicules -->
                 {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="{{ path('admin_dashboard') }}">Accéder au Dashboard Admin</a></li>
+                    <li><a href="{{ path('admin_dashboard') }}">Dashboard Admin</a></li>
                 {% endif %}
             </ul>
-            <div class="search-bar">
-                <input type="text" placeholder="Rechercher un véhicule">
-            </div>
-            <div class="contact-info">+33 1 23 45 67 89</div>
-            <a href="#" class="cta-button">Réserver en ligne</a>
         </nav>
 
         <!-- Contenu principal -->
         <div class="content">
             {% block body %}
-            <h1>Contactez-nous</h1>
-            <form action="" method="post">
-                <div>
-                    <label for="name">Nom</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-
-                <div>
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-
-                <div>
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-
-                <button type="submit">Envoyer</button>
-            </form>
+            <!-- Ton contenu ici -->
             {% endblock %}
         </div>
 
-        <!-- Pied de page -->
+        <!-- Footer -->
         <footer>
             <p>&copy; 2024 Garage Parrot. Tous droits réservés.</p>
             <p>Adresse: 123 Rue du Garage, Paris | Téléphone: +33 1 23 45 67 89</p>

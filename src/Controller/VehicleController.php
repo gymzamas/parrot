@@ -17,20 +17,21 @@ final class VehicleController extends AbstractController
     #[Route(name: 'app_vehicle_index', methods: ['GET'])]
     public function index(Request $request, VehicleRepository $vehicleRepository): Response
     {
-        // Récupérer les filtres depuis la requête avec validation des valeurs
-        $keywords = $request->query->get('keywords'); // Mots-clés
-        $marque = $request->query->get('marque'); // Marque
-        $model = $request->query->get('model'); // Modèle
-        $carburant = $request->query->get('carburant'); // Carburant
+        // Récupérer les filtres depuis la requête
+        $keywords = $request->query->get('keywords');
+        $marque = $request->query->get('marque');
+        $model = $request->query->get('model');
+        $carburant = $request->query->get('carburant');
 
+        // Validation des filtres avec des valeurs par défaut
         $minPrice = filter_var($request->query->get('minPrice'), FILTER_VALIDATE_FLOAT, ["options" => ["default" => 0]]);
         $maxPrice = filter_var($request->query->get('maxPrice'), FILTER_VALIDATE_FLOAT, ["options" => ["default" => 50000]]);
         $minKilometrage = filter_var($request->query->get('minKilometrage'), FILTER_VALIDATE_INT, ["options" => ["default" => 0]]);
         $maxKilometrage = filter_var($request->query->get('maxKilometrage'), FILTER_VALIDATE_INT, ["options" => ["default" => 300000]]);
         $minYear = filter_var($request->query->get('minYear'), FILTER_VALIDATE_INT, ["options" => ["default" => 2000]]);
-        $maxYear = filter_var($request->query->get('maxYear'), FILTER_VALIDATE_INT, ["options" => ["default" => 2022]]);
+        $maxYear = filter_var($request->query->get('maxYear'), FILTER_VALIDATE_INT, ["options" => ["default" => date('Y')]]);
 
-        // Construire la requête filtrée avec les 10 arguments
+        // Construire la requête filtrée
         $vehicles = $vehicleRepository->findByFilters(
             $keywords,
             $marque,
@@ -57,10 +58,25 @@ final class VehicleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Gérer l'upload d'image si nécessaire
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('vehicle_images_directory'),
+                    $newFilename
+                );
+                $vehicle->setImage($newFilename);
+            }
+
             $entityManager->persist($vehicle);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_vehicle_index');
+            // Ajout d'un message flash
+            $this->addFlash('success', 'Véhicule ajouté avec succès.');
+
+            // Rediriger vers la page du nouveau véhicule
+            return $this->redirectToRoute('app_vehicle_show', ['id' => $vehicle->getId()]);
         }
 
         return $this->render('vehicle/new.html.twig', [

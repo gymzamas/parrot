@@ -8,7 +8,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
+            background-color: #d94350;
             color: #333;
         }
 
@@ -50,48 +50,6 @@
             margin-bottom: 20px;
         }
 
-        /* Boutons sous la barre de navigation, côté droit */
-        .cta-buttons-nav {
-            display: flex;
-            justify-content: flex-end; /* Aligne les boutons à droite */
-            padding-right: 20px;
-            margin-top: 50px; /* Ajoute une marge supérieure pour descendre les boutons */
-        }
-
-        .cta-buttons-nav a {
-            margin-left: 10px;
-        }
-
-        .cta-button {
-            background-color: #e74c3c;
-            color: white;
-            padding: 10px 20px;
-            font-weight: bold;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: #c0392b;
-        }
-
-        .cta-button.signup {
-            background-color: #3498db;
-        }
-
-        .cta-button.signup:hover {
-            background-color: #2980b9;
-        }
-
-        .cta-button.login {
-            background-color: #2ecc71;
-        }
-
-        .cta-button.login:hover {
-            background-color: #27ae60;
-        }
-
         /* Section Options */
         .choose-section {
             text-align: center;
@@ -108,16 +66,143 @@
             font-size: 1.2rem;
             text-decoration: none;
         }
+
+        /* Marques populaires (Flexbox) */
+        .brand-selection {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .brand-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            width: 200px;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-card:hover {
+            transform: scale(1.05);
+        }
+
+        .brand-card img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .brand-card h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .brand-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Flexbox pour afficher les voitures de luxe */
+        .luxury-cars-section {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .luxury-car {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            width: 250px;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .luxury-car:hover {
+            transform: scale(1.05);
+        }
+
+        .luxury-car img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .luxury-car h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .luxury-car a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Responsive Media Queries */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .brand-card {
+                width: 150px;
+            }
+
+            .luxury-car {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .text-content {
+                left: 20px;
+                top: 30%;
+            }
+
+            .brand-card {
+                width: 100px;
+            }
+
+            .luxury-car {
+                width: 150px;
+            }
+
+            .choose-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .choose-section a {
+                font-size: 1rem;
+            }
+        }
     </style>
 {% endblock %}
 
 {% block body %}
-    <!-- Boutons juste sous la barre de navigation, alignés à droite -->
-    <div class="cta-buttons-nav">
-        <a href="http://localhost:8081/register" class="cta-button signup">Inscription</a>
-        <a href="http://localhost:8081/login" class="cta-button login">Connexion</a>
-        <a href="#" class="cta-button">Réserver en ligne</a>
-    </div>
 
     <!-- Hero Section -->
     <div class="hero">
@@ -125,7 +210,6 @@
             <span>S-class</span>
             <h1>Mercedes Maybach</h1>
             <p>Réserver à partir de 4 000 €</p>
-            <a href="#" class="cta-button">Réserver</a>
         </div>
     </div>
 
@@ -133,5 +217,53 @@
     <div class="choose-section">
         <h2>Choisir un véhicule</h2>
         <a href="#">voir tout ></a>
+    </div>
+
+    <!-- Nouvelle section pour les marques populaires -->
+    <div class="brand-selection">
+        <a href="http://localhost:8081/vehicle" class="brand-card">
+            <img src="{{ asset('images/audi-logo.png') }}" alt="Audi">
+            <h3>Audi</h3>
+        </a>
+        <a href="http://localhost:8081/vehicle" class="brand-card">
+            <img src="{{ asset('images/bmw-logo.png') }}" alt="BMW">
+            <h3>BMW</h3>
+        </a>
+        <a href="http://localhost:8081/vehicle" class="brand-card">
+            <img src="{{ asset('images/mercedes-logo.png') }}" alt="Mercedes">
+            <h3>Mercedes</h3>
+        </a>
+        <a href="http://localhost:8081/vehicle" class="brand-card">
+            <img src="{{ asset('images/porsche-logo.png') }}" alt="Porsche">
+            <h3>Porsche</h3>
+        </a>
+        <a href="http://localhost:8081/vehicle" class="brand-card">
+            <img src="{{ asset('images/vw-logo.png') }}" alt="Volkswagen">
+            <h3>Volkswagen</h3>
+        </a>
+    </div>
+
+    <!-- Flexbox pour afficher les voitures de luxe avec lien cliquable -->
+    <div class="luxury-cars-section">
+        <a href="http://localhost:8081/vehicle" class="luxury-car">
+            <img src="{{ asset('images/audi-rs6.png') }}" alt="Audi RS6">
+            <h3>Audi RS6</h3>
+        </a>
+        <a href="http://localhost:8081/vehicle" class="luxury-car">
+            <img src="{{ asset('images/mercedes-amg.jpg') }}" alt="Mercedes AMG">
+            <h3>Mercedes AMG</h3>
+        </a>
+        <a href="http://localhost:8081/vehicle" class="luxury-car">
+            <img src="{{ asset('images/audi-r8-spyder.jpg') }}" alt="Audi R8 Spyder">
+            <h3>Audi R8 Spyder</h3>
+        </a>
+        <a href="http://localhost:8081/vehicle" class="luxury-car">
+            <img src="{{ asset('images/bmw-m99.jpeg') }}" alt="BMW M4">
+            <h3>BMW M4</h3>
+        </a>
+        <a href="http://localhost:8081/vehicle" class="luxury-car">
+            <img src="{{ asset('images/audi-rs7.jpg') }}" alt="Audi RS7">
+            <h3>Audi RS7</h3>
+        </a>
     </div>
 {% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commentaires à valider{% endblock %}
+
+{% block body %}
+    <h1>Commentaires à valider</h1>
+
+    {% for comment in comments %}
+        <div>
+            <p><strong>{{ comment.data().name }}</strong> a écrit :</p>
+            <p>{{ comment.data().content }}</p>
+            <p>Note : {{ comment.data().rating }}/5</p>
+            <a href="{{ path('admin_approve_comment', { 'id': comment.id() }) }}" class="btn btn-success">Approuver</a>
+            <a href="{{ path('admin_reject_comment', { 'id': comment.id() }) }}" class="btn btn-danger">Rejeter</a>
+        </div>
+        <hr>
+    {% else %}
+        <p>Aucun commentaire en attente de validation.</p>
+    {% endfor %}
+{% endblock %}

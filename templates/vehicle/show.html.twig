@@ -91,7 +91,7 @@
 <div class="vehicle-details-container">
     <!-- Section Image -->
     <div class="vehicle-image">
-        <img src="{{ asset('images/' ~ vehicle.image) }}" alt="Photo de {{ vehicle.marque }}">
+        <img src="{{ vehicle.image ? asset('images/' ~ vehicle.image) : asset('images/default-vehicle.png') }}" alt="Photo de {{ vehicle.marque }}">
         <div class="extra-images">
             <img src="{{ asset('images/interior_1.png') }}" alt="Intérieur">
             <img src="{{ asset('images/wheel_1.png') }}" alt="Roue">
@@ -105,10 +105,10 @@
         <p class="price">Prix {{ vehicle.prix | number_format(0, ',', ' ') }} €</p>
         <ul>
             <li><span>Kilométrage :</span> {{ vehicle.kilometrage | number_format(0, ',', ' ') }} km</li>
-            <li><span>Boîte de vitesse :</span> Automatique</li>
-            <li><span>Carburant :</span> Essence</li>
+            <li><span>Boîte de vitesse :</span> {{ vehicle.boiteDeVitesse ? vehicle.boiteDeVitesse : 'Automatique' }}</li>
+            <li><span>Carburant :</span> {{ vehicle.carburant ? vehicle.carburant : 'Essence' }}</li>
             <li><span>Millésime :</span> {{ vehicle.annee }}</li>
-            <li><span>Mise en circulation :</span> 08/2015</li>
+            <li><span>Mise en circulation :</span> {{ vehicle.dateMiseEnCirculation ? vehicle.dateMiseEnCirculation|date('d/m/Y') : 'N/A' }}</li>
         </ul>
 
         <!-- Bouton pour contacter le vendeur -->

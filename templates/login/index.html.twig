@@ -2,25 +2,96 @@
 
 {% block title %}Connexion{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            font-family: 'Rajdhani', sans-serif;
+            color: #D92332;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            color: #333;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #D92332;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #B91F28;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-<h1>Connexion</h1>
+<div class="login-container">
+    <h1>Connexion</h1>
 
-<form method="post">
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <form method="post">
+        {% if error %}
+            <div class="error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-    <div>
-        <label for="username">Email</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}">
-    </div>
+        <div>
+            <label for="username">Email</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required autofocus>
+        </div>
 
-    <div>
-        <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="_password">
-    </div>
+        <div>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="_password" required>
+        </div>
 
-    <button type="submit">Connexion</button>
-</form>
-
+        <button type="submit">Connexion</button>
+    </form>
+</div>
 {% endblock %}

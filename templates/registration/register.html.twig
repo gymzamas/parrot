@@ -2,36 +2,178 @@
 
 {% block title %}Inscription{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Rajdhani', sans-serif;
+            color: #D92332;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #D92332;
+            box-shadow: 0 0 5px rgba(217, 35, 50, 0.2);
+        }
+
+        .form-helper {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .btn-primary {
+            background-color: #D92332;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            background-color: #B91F28;
+        }
+
+        /* Toggle password icon */
+        .toggle-password {
+            position: absolute;
+            top: 38px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+    </style>
+{% endblock %}
+
 {% block body %}
 <h1>Inscription</h1>
 
-{{ form_start(registrationForm) }}
+<div class="form-container">
+    {{ form_start(registrationForm, {'attr': {'onsubmit': 'return validateForm()'}}) }}
+
     <div class="form-group">
         {{ form_label(registrationForm.nom) }}
         {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+        <p class="form-helper">Veuillez entrer votre nom.</p>
+        <div class="error-message" id="nomError"></div>
     </div>
 
     <div class="form-group">
         {{ form_label(registrationForm.prenom) }}
         {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+        <p class="form-helper">Veuillez entrer votre prénom.</p>
+        <div class="error-message" id="prenomError"></div>
     </div>
 
     <div class="form-group">
         {{ form_label(registrationForm.email) }}
         {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+        <p class="form-helper">Votre adresse e-mail doit avoir le format : nom@domaine.com.</p>
+        <div class="error-message" id="emailError"></div>
     </div>
 
     <div class="form-group">
         {{ form_label(registrationForm.plainPassword.first, 'Mot de passe') }}
-        {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'form-control', 'id': 'password', 'minlength': '6', 'title': 'Le mot de passe doit contenir au moins 6 caractères'}}) }}
+        <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
+        <p class="form-helper">Le mot de passe doit contenir au moins 6 caractères.</p>
+        <div class="error-message" id="passwordError"></div>
     </div>
 
     <div class="form-group">
         {{ form_label(registrationForm.plainPassword.second, 'Confirmez le mot de passe') }}
-        {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control', 'id': 'confirmPassword'}}) }}
+        <p class="form-helper">Assurez-vous que les deux mots de passe sont identiques.</p>
+        <div class="error-message" id="confirmPasswordError"></div>
     </div>
 
-    <button type="submit" class="btn btn-primary">S'inscrire</button>
+    <button type="submit" class="btn-primary">S'inscrire</button>
 
-{{ form_end(registrationForm) }}
+    {{ form_end(registrationForm) }}
+</div>
+
+<script>
+    // Fonction pour valider le formulaire
+    function validateForm() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        let valid = true;
+
+        // Réinitialiser les messages d'erreur
+        document.getElementById('passwordError').textContent = '';
+        document.getElementById('confirmPasswordError').textContent = '';
+
+        // Validation du mot de passe
+        if (password.length < 6) {
+            document.getElementById('passwordError').textContent = 'Le mot de passe doit contenir au moins 6 caractères.';
+            valid = false;
+        }
+
+        // Validation de la correspondance des mots de passe
+        if (password !== confirmPassword) {
+            document.getElementById('confirmPasswordError').textContent = 'Les mots de passe ne correspondent pas.';
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    // Fonction pour basculer la visibilité du mot de passe
+    function togglePasswordVisibility() {
+        const passwordField = document.getElementById('password');
+        const passwordFieldType = passwordField.getAttribute('type');
+        if (passwordFieldType === 'password') {
+            passwordField.setAttribute('type', 'text');
+        } else {
+            passwordField.setAttribute('type', 'password');
+        }
+    }
+</script>
 {% endblock %}
