@@ -1,11 +1,17 @@
-# Utilisation de l'image officielle PHP 8.2 avec FPM
-FROM php:8.2-fpm
+# Utilisation de l'image officielle PHP 8.3 avec FPM
+FROM php:8.3-fpm
 
 # Installation des dépendances système et des extensions PHP nécessaires
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev zip unzip libssl-dev pkg-config libsodium-dev \
     && docker-php-ext-install pdo pdo_mysql zip sodium \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Installation de gRPC et protobuf pour Firestore
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    autoconf zlib1g-dev libgmp-dev libz-dev libpq-dev \
+    && pecl install grpc protobuf \
+    && docker-php-ext-enable grpc protobuf
 
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

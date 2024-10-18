@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Laisser un avis</h1>
+
+    <div class="container mt-4">
+        <div class="card p-4 shadow-sm" style="border-radius: 15px;">
+            <form action="{{ path('ajouter_avis') }}" method="POST" class="form-group">
+                
+                <div class="mb-4">
+                    <label for="nom" class="form-label">Nom</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" name="nom" id="nom" class="form-control" placeholder="Votre nom" required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Votre email" required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="commentaire" class="form-label">Votre avis</label>
+                    <textarea name="commentaire" id="commentaire" class="form-control" placeholder="Votre avis" required style="height: 150px; border-radius: 10px;"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="note" class="form-label">Note</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-star-fill text-warning"></i></span>
+                        <input type="number" name="note" id="note" class="form-control" min="1" max="5" required>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary px-5 py-2" style="border-radius: 30px;">Envoyer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
