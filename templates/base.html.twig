@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Garage Parrot{% endblock %}</title>
+        <title>{% block title %}Garage LYNX AUTO MOTO{% endblock %}</title>
         
         <!-- Favicon -->
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
@@ -78,6 +78,18 @@
                 background-color: rgba(255, 255, 255, 0.2);
             }
 
+            .user-info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 18px;
+                color: #fff;
+            }
+
+            .user-info i {
+                font-size: 24px;
+            }
+
             /* Footer */
             footer {
                 text-align: center;
@@ -92,6 +104,25 @@
             footer p {
                 margin: 5px;
             }
+
+            .auth-buttons {
+                display: flex;
+                gap: 10px;
+            }
+
+            .auth-buttons a {
+                color: #fff;
+                text-decoration: none;
+                padding: 8px 12px;
+                border-radius: 5px;
+                border: 1px solid #fff;
+                transition: background-color 0.3s ease;
+            }
+
+            .auth-buttons a:hover {
+                background-color: #ffffff;
+                color: #000;
+            }
         </style>
 
         {% block stylesheets %}{% endblock %}
@@ -100,7 +131,7 @@
 
         <!-- Navbar -->
         <nav>
-            <div class="logo">Garage Parrot</div>
+            <div class="logo">Garage LYNX AUTO MOTO</div>
             <ul>
                 <li><a href="{{ path('app_home') }}">Accueil</a></li>
                 <li><a href="{{ path('nos_services') }}">Nos Services</a></li>
@@ -109,6 +140,18 @@
                     <li><a href="{{ path('admin_dashboard') }}">Dashboard Admin</a></li>
                 {% endif %}
             </ul>
+            <div class="auth-buttons">
+                {% if app.user %}
+                    <div class="user-info">
+                        <i class="bi bi-person-circle"></i>
+                        <span>Bonjour, {{ app.user.nom }}</span>
+                    </div>
+                    <a href="{{ path('app_logout') }}">Déconnexion</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Connexion</a>
+                    <a href="{{ path('app_register') }}">Inscription</a>
+                {% endif %}
+            </div>
         </nav>
 
         <!-- Contenu principal -->
@@ -118,7 +161,7 @@
 
         <!-- Footer -->
         <footer>
-            <p>&copy; 2024 Garage Parrot. Tous droits réservés.</p>
+            <p>&copy; 2024 Garage LYNX AUTO MOTO. Tous droits réservés.</p>
             <p>Adresse: 123 Rue du Garage, Paris | Téléphone: +33 1 23 45 67 89</p>
         </footer>
 

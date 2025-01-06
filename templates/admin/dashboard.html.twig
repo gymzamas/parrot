@@ -3,32 +3,38 @@
 {% block title %}Dashboard Admin{% endblock %}
 
 {% block body %}
-    <div class="dashboard-container">
-        <h1>Bienvenue sur le Dashboard Admin</h1>
+    <div class="container dashboard-container">
+        <h1>Bienvenue sur le Dashboard Admin LYNX AUTO</h1>
         <p>Gérez vos employés, horaires, et véhicules depuis ce tableau de bord.</p>
 
         <div class="dashboard-section">
             <h2>Gestion des employés</h2>
-            <a href="{{ path('app_employe_index') }}" class="btn btn-primary">Voir les employés</a>
-            <a href="{{ path('app_employe_new') }}" class="btn btn-success">Ajouter un employé</a>
+            <div class="btn-group">
+                <a href="{{ path('app_employe_index') }}" class="btn btn-primary" aria-label="Voir la liste des employés">Voir les employés</a>
+                <a href="{{ path('app_employe_new') }}" class="btn btn-success" aria-label="Ajouter un employé">Ajouter un employé</a>
+            </div>
         </div>
 
         <div class="dashboard-section">
             <h2>Gestion des horaires</h2>
-            <a href="{{ path('app_horaire_index') }}" class="btn btn-primary">Voir les horaires</a>
-            <a href="{{ path('app_horaire_new') }}" class="btn btn-success">Ajouter un horaire</a>
+            <div class="btn-group">
+                <a href="{{ path('app_horaire_index') }}" class="btn btn-primary" aria-label="Voir les horaires">Voir les horaires</a>
+                <a href="{{ path('app_horaire_new') }}" class="btn btn-success" aria-label="Ajouter un horaire">Ajouter un horaire</a>
+            </div>
         </div>
 
         <div class="dashboard-section">
             <h2>Gestion des véhicules</h2>
-            <a href="{{ path('app_vehicle_index') }}" class="btn btn-primary">Voir tous les véhicules</a>
-            <a href="{{ path('app_vehicle_new') }}" class="btn btn-success">Ajouter un nouveau véhicule</a>
+            <div class="btn-group">
+                <a href="{{ path('app_vehicle_index') }}" class="btn btn-primary" aria-label="Voir tous les véhicules">Voir tous les véhicules</a>
+                <a href="{{ path('app_vehicle_new') }}" class="btn btn-success" aria-label="Ajouter un nouveau véhicule">Ajouter un nouveau véhicule</a>
+            </div>
         </div>
     </div>
 
     <style>
         .dashboard-container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 40px;
             text-align: center;
@@ -48,7 +54,7 @@
             margin-bottom: 15px;
         }
 
-        .btn {
+        .btn-group a {
             margin: 5px;
             padding: 10px 20px;
             color: white;

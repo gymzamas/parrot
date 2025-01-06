@@ -2,3 +2,6 @@ controllers:
   resource: ../src/Controller/
   type: attribute
   prefix: /
+rgpd:
+  path: /rgpd
+  controller: App\Controller\RgpdController::index

@@ -14,7 +14,7 @@ services:
   Kreait\Firebase\Factory:
     class: Kreait\Firebase\Factory
     arguments:
-      - '%kernel.project_dir%/config/garagefirebase-firebase-adminsdk-tfjh9-10a52e104d.json'
+      - "%kernel.project_dir%/config/garagefirebase-firebase-adminsdk-tfjh9-10a52e104d.json"
 
   # Default configuration for services in this file
   _defaults:
