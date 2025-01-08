@@ -1,28 +1,44 @@
-{# templates/security/login.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <h1>Connexion</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <form method="post" class="p-4 border rounded bg-light">
+                <h1 class="h3 mb-4 text-center">Please sign in</h1>
+                
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-    {% if error %}
-        <div class="alert alert-danger">
-            {{ error.messageKey|trans(error.messageData, 'security') }}
+                <!-- Email Field -->
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus aria-describedby="emailHelp" aria-required="true">
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-3">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required aria-required="true">
+                </div>
+
+                <!-- CSRF Token -->
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <!-- Remember Me Checkbox -->
+                <div class="form-check mb-3">
+                    <input type="checkbox" name="_remember_me" id="rememberMe" class="form-check-input">
+                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                </div>
+
+                <!-- Submit Button -->
+                <button class="btn btn-lg btn-primary w-100" type="submit">Sign in</button>
+            </form>
         </div>
-    {% endif %}
+    </div>
+</div>
 
-    <form method="post">
-        <div>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" value="{{ last_username }}" required autofocus>
-        </div>
-
-        <div>
-            <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password" required>
-        </div>
-
-        <button type="submit">Se connecter</button>
-    </form>
 {% endblock %}

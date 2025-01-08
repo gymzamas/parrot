@@ -1,5 +1,3 @@
-{# templates/nos_service/index.html.twig #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Nos Services{% endblock %}
@@ -12,6 +10,29 @@
             padding: 20px;
         }
 
+        /* Slider Section */
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slider img.active {
+            opacity: 1;
+        }
+
         h1 {
             font-family: 'Rajdhani', sans-serif;
             color: #D92332;
@@ -21,7 +42,7 @@
 
         .services {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin: 0 auto;
             max-width: 1200px;
@@ -60,34 +81,116 @@
             line-height: 1.6;
         }
 
-        .service p.prix {
+        .service .cta-button {
+            background-color: #D92332;
+            color: white;
+            padding: 10px 20px;
             font-weight: bold;
-            color: #D92332;
-            font-size: 1.2em;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
         }
 
-        .no-services {
-            text-align: center;
-            font-style: italic;
-            color: #888;
-            font-size: 1.2em;
+        .service .cta-button:hover {
+            background-color: #B91F28;
         }
     </style>
 {% endblock %}
 
 {% block body %}
+
+<!-- Slider Section -->
+<div class="slider">
+    <img src="{{ asset('images/slider-image1.jpg') }}" class="active" alt="Slide 1">
+    <img src="{{ asset('images/slider-image2.webp') }}" alt="Slide 2">
+    <img src="{{ asset('images/slider-image3.jpg') }}" alt="Slide 3">
+</div>
+
 <h1>Nos services</h1>
 
 <div class="services">
-    {% for service in services %}
+    <!-- Service : Achat de véhicule -->
+    <a href="http://localhost:8081/home">
         <div class="service">
-            <h2>{{ service.nom }}</h2>
-            <img src="{{ service.image }}" alt="{{ service.nom }}">
-            <p>{{ service.description }}</p>
-            <p class="prix">Prix : {{ service.prix }} €</p>
+            <h2>Achat de véhicule</h2>
+            <img src="{{ asset('images/lynx8.jpg') }}" alt="Achat de véhicule">
+            <p>Découvrez notre large sélection de véhicules neufs et d'occasion.</p>
+            <span class="cta-button">En savoir plus</span>
         </div>
-    {% else %}
-        <p class="no-services">Aucun service disponible pour le moment.</p>
-    {% endfor %}
+    </a>
+
+    <!-- Service : Entretien et vidange -->
+    <a href="http://localhost:8081/home">
+        <div class="service">
+            <h2>Entretien et vidange</h2>
+            <img src="{{ asset('images/entretien-vidange.jpg') }}" alt="Entretien et vidange">
+            <p>Nos experts s'occupent de l'entretien complet de votre véhicule.</p>
+            <span class="cta-button">En savoir plus</span>
+        </div>
+    </a>
+
+    <!-- Service : Contrôle des freins -->
+    <a href="http://localhost:8081/home">
+        <div class="service">
+            <h2>Contrôle des freins</h2>
+            <img src="{{ asset('images/Contrôle des freins2.jpg') }}" alt="Contrôle des freins">
+            <p>Assurez-vous que vos freins sont en parfait état avec nos contrôles professionnels.</p>
+            <span class="cta-button">En savoir plus</span>
+        </div>
+    </a>
+
+    <!-- Service : Réparation mécanique -->
+    <a href="http://localhost:8081/home">
+        <div class="service">
+            <h2>Réparation mécanique</h2>
+            <img src="{{ asset('images/revision3.jpg') }}" alt="Réparation mécanique">
+            <p>Nos techniciens qualifiés réparent tous les types de pannes mécaniques.</p>
+            <span class="cta-button">En savoir plus</span>
+        </div>
+    </a>
+
+    <!-- Service : Inspection des pneumatiques -->
+    <a href="http://localhost:8081/home">
+        <div class="service">
+            <h2>Inspection des pneumatiques</h2>
+            <img src="{{ asset('images/inspection-pneus.jpg') }}" alt="Inspection des pneumatiques">
+            <p>Vérifiez l'état de vos pneus et bénéficiez de conseils d'experts.</p>
+            <span class="cta-button">En savoir plus</span>
+        </div>
+    </a>
+
+    <!-- Service : Achat de pièces auto -->
+    <a href="http://localhost:8081/home">
+        <div class="service">
+            <h2>Achat de pièces auto</h2>
+            <img src="{{ asset('images/achat-pieces-auto.jpg') }}" alt="Achat de pièces auto">
+            <p>Trouvez les pièces détachées pour tous les types de véhicules.</p>
+            <span class="cta-button">En savoir plus</span>
+        </div>
+    </a>
+
+    <!-- Service : Location de voiture -->
+    <a href="http://localhost:8081/home">
+        <div class="service">
+            <h2>Location de voiture</h2>
+            <img src="{{ asset('images/location-voiture.jpg') }}" alt="Location de voiture">
+            <p>Louez une voiture rapidement et facilement pour vos besoins.</p>
+            <span class="cta-button">En savoir plus</span>
+        </div>
+    </a>
 </div>
+
+<script>
+    // Slider functionality
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.slider img');
+    
+    setInterval(() => {
+        slides[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add('active');
+    }, 3000);
+</script>
+
 {% endblock %}

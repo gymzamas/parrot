@@ -1,0 +1,100 @@
+<style>
+    .delete-form {
+        display: inline-block;
+        margin: 0;
+    }
+
+    .delete-form button {
+        background-color: #e74c3c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .delete-form button:hover {
+        background-color: #c0392b;
+    }
+
+    /* Confirmation dialog styles (for better UX) */
+    .custom-confirm-dialog {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: none;
+        z-index: 1000;
+    }
+
+    .custom-confirm-dialog h3 {
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .custom-confirm-dialog button {
+        margin: 10px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .btn-confirm {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    .btn-cancel {
+        background-color: #ccc;
+        color: #333;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 999;
+    }
+</style>
+
+<div class="overlay" id="overlay"></div>
+
+<form method="post" action="{{ path('app_vehicle_delete', {'id': vehicle.id}) }}" class="delete-form" onsubmit="event.preventDefault(); showConfirmDialog();">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ vehicle.id) }}">
+    <button class="btn">Supprimer</button>
+</form>
+
+<div class="custom-confirm-dialog" id="confirmDialog">
+    <h3>Êtes-vous sûr de vouloir supprimer cet élément ?</h3>
+    <button class="btn-confirm" onclick="confirmDelete()">Confirmer</button>
+    <button class="btn-cancel" onclick="closeConfirmDialog()">Annuler</button>
+</div>
+
+<script>
+    function showConfirmDialog() {
+        document.getElementById('confirmDialog').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+
+    function closeConfirmDialog() {
+        document.getElementById('confirmDialog').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+
+    function confirmDelete() {
+        document.querySelector('.delete-form').submit();
+    }
+</script>

@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouveau véhicule{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #1e90ff;
+        box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+    }
+
+    .form-buttons {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .form-buttons button {
+        background-color: #1e90ff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+    }
+
+    .form-buttons button:hover {
+        background-color: #1c86ee;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #333;
+        text-decoration: none;
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 0.9rem;
+    }
+
+    .back-link:hover {
+        background-color: #f5f5f5;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Créer un nouveau véhicule</h1>
+
+    {{ include('vehicle/_form.html.twig') }}
+
+    <div class="form-buttons">
+        <a href="{{ path('app_vehicle_index') }}" class="back-link">Retour à la liste</a>
+    </div>
+</div>
+{% endblock %}

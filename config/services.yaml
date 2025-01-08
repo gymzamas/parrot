@@ -1,27 +1,36 @@
-# config/services.yaml
-
 services:
+  # Handlers pour la gestion des succès et des échecs de connexion
   App\Security\LoginFailureHandler:
     autowire: true
     autoconfigure: true
-    public: true
+    public: false # Utilisez public: false si vous n'avez pas besoin d'accéder directement à ce service depuis l'extérieur
 
   App\Security\LoginSuccessHandler:
     autowire: true
     autoconfigure: true
-    public: true
+    public: false # Idem, éviter public: true à moins d'un besoin spécifique
 
-  # default configuration for services in *this* file
+  # Configuration de Firebase avec ton fichier JSON
+  Kreait\Firebase\Factory:
+    class: Kreait\Firebase\Factory
+    arguments:
+      - "%kernel.project_dir%/config/garagefirebase-firebase-adminsdk-tfjh9-10a52e104d.json"
+
+  # Default configuration for services in this file
   _defaults:
-    autowire: true # Automatically injects dependencies in your services.
-    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-    public: false # By default, services are private
+    autowire: true
+    autoconfigure: true
+    public: false # Toujours définir public: false par défaut pour plus de sécurité
 
-  # makes classes in src/ available to be used as services
-  # this creates a service per class whose id is the fully-qualified class name
+  # Makes classes in src/ available to be used as services
   App\:
     resource: "../src/"
     exclude:
       - "../src/DependencyInjection/"
       - "../src/Entity/"
       - "../src/Kernel.php"
+
+# Paramètres globaux
+parameters:
+  vehicle_images_directory: "%kernel.project_dir%/public/uploads/vehicles"
+  images_directory: "%kernel.project_dir%/public/uploads/images"
